@@ -11,29 +11,15 @@ ELSEIF (APPLE)
     MESSAGE(STATUS "Platform is MacOS")
     add_definitions(-DMACOS)
 
-    #for ffmpeg
-    include_directories(/usr/local/Cellar/ffmpeg/4.1.3/include/)
-    link_directories(/usr/local/Cellar/ffmpeg/4.1.3/lib/)
-
-    # for SDL2
-    include_directories(/usr/local/Cellar/sdl2/2.0.9/include/)
-    link_directories(/usr/local/Cellar/sdl2/2.0.9/lib)
+    include_directories(/usr/local/include/)
+    link_directories(/usr/local/lib/)
 ELSEIF (UNIX)
     MESSAGE(STATUS "Platform is UNIX")
     add_definitions(-DUNIX)
 ENDIF ()
 
 
-if(APPLE)
-    add_definitions(-DMACOS)
-
-else()
-    add_definitions(-DWINDOWS)
-
-endif()
-
-
-add_executable(AudioRecorder main.cpp Recorder.cpp Recorder.h AudioRecorder.cpp AudioRecorder.h ffmpeg.h ListAVDevices.cpp ListAVDevices.h)
+add_executable(AudioRecorder main.cpp AudioRecorder.cpp AudioRecorder.h ffmpeg.h ListAVDevices.cpp ListAVDevices.h)
 
 target_link_libraries(
         AudioRecorder
