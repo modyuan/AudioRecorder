@@ -8,7 +8,6 @@
 #include "ffmpeg.h"
 #include <string>
 #include <atomic>
-#include <mutex>
 #include <thread>
 #include <cstdint>
 

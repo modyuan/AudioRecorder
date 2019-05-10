@@ -19,7 +19,7 @@ ELSEIF (UNIX)
 ENDIF ()
 
 
-add_executable(AudioRecorder main.cpp AudioRecorder.cpp AudioRecorder.h ffmpeg.h ListAVDevices.cpp ListAVDevices.h)
+add_executable(AudioRecorder main.cpp AudioRecorder.cpp AudioRecorder.h ffmpeg.h ListAVDevices.cpp ListAVDevices.h AudioPlayer.cpp AudioPlayer.h)
 
 target_link_libraries(
         AudioRecorder
