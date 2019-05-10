@@ -5,7 +5,8 @@ use lib of ffmpeg to record audio as a aac file.
 - [x] All platform support
 - [ ] Test in all platform
 - [x] Audio Recorder
-- [ ] Audio Player
+- [x] Audio Player
+- [ ] Command Line
 
 安装依赖(MACOS)：  
 ```bash
