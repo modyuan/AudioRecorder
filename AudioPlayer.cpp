@@ -154,3 +154,20 @@ void AudioPlayer::SdlAudio()
     }
     SDL_PauseAudio(0);
 }
+
+void AudioPlayer::Close()
+{
+	SDL_CloseAudio();
+
+	avformat_close_input(&audioFormatCtx);
+	avcodec_free_context(&audioCodecCtx);
+	swr_free(&audioConverter);
+
+	while (!fifo.empty()) {
+		uint8_t** a = fifo.front();
+		fifo.pop();
+		av_freep(&a[0]);
+	}
+	puts("Close AudioPlayer.");
+
+}
