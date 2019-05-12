@@ -142,14 +142,14 @@ void AudioRecorder::Stop()
     if (ret < 0) throw std::runtime_error("can not write file trailer.");
     avio_close(audioOutFormatCtx->pb);
 
-    avformat_free_context(audioInFormatCtx);
-    avformat_free_context(audioOutFormatCtx);
-
     swr_free(&audioConverter);
     av_audio_fifo_free(audioFifo);
 
     avcodec_free_context(&audioInCodecCtx);
     avcodec_free_context(&audioOutCodecCtx);
+    
+    avformat_close_input(&audioInFormatCtx);
+	avformat_free_context(audioOutFormatCtx);
     puts("Stop record."); fflush(stdout);
 }
 
