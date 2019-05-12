@@ -44,9 +44,10 @@ private:
 public:
 
     AudioPlayer(std::string file) :filepath(file),audioStream(nullptr) {}
-
+    ~AudioPlayer() { Close(); }
     void OpenDevice();
     void PlayAndDecode();
+    void Close();
 
 };
 
