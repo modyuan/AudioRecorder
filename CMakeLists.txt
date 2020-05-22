@@ -33,3 +33,6 @@ target_link_libraries(
         swscale
         SDL2
 )
+IF(CMAKE_SYSTEM MATCHES Linux)
+target_link_libraries(${PROJECT_NAME} pthread)
+ENDIF()

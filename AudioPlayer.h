@@ -8,6 +8,10 @@
 #include <chrono>
 #include <mutex>
 #include "ffmpeg.h"
+#ifdef __linux__
+#include <atomic>
+#include <thread>
+#endif
 
 extern "C" {
 #define SDL_MAIN_HANDLED
