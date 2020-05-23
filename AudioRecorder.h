@@ -7,9 +7,11 @@
 
 #include "ffmpeg.h"
 #include <string>
+#include <cstdint>
+#ifdef __linux__
 #include <atomic>
 #include <thread>
-#include <cstdint>
+#endif
 
 using std::string;
 

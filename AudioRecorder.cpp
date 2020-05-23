@@ -1,4 +1,7 @@
 #include "AudioRecorder.h"
+#ifdef __linux__
+#include <assert.h>
+#endif
 
 const AVSampleFormat requireAudioFmt = AV_SAMPLE_FMT_FLTP;
 
@@ -107,6 +110,7 @@ void AudioRecorder::Open()
 
     //Add a new stream to output,should be called by the user before avformat_write_header() for muxing
     audioOutStream = avformat_new_stream(audioOutFormatCtx, audioOutCodec);
+
     if (audioOutStream == NULL)
     {
         throw std::runtime_error("Fail to new a audio stream.");
@@ -114,8 +118,10 @@ void AudioRecorder::Open()
     avcodec_parameters_from_context(audioOutStream->codecpar, audioOutCodecCtx);
 
     // write file header
-    avformat_write_header(audioOutFormatCtx, NULL);
-
+    if (avformat_write_header(audioOutFormatCtx, NULL) < 0)
+    {
+        throw std::runtime_error("Fail to write header for audio.");
+    }
 }
 
 void AudioRecorder::Start()
@@ -249,5 +255,5 @@ void AudioRecorder::StartEncode()
     av_packet_free(&inputPacket);
     av_packet_free(&outputPacket);
     av_frame_free(&inputFrame);
-    printf("encode %lld audio packets in total.\n", frameCount);
+    printf("encode %lu audio packets in total.\n", frameCount);
 }
